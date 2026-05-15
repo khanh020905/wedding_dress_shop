@@ -186,7 +186,6 @@ export default function Home() {
             className="hero-image"
           />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-[#fbfaf7] via-[#fbfaf7]/80 to-[#fbfaf7]/5" />
         <div className="hero-shell">
           <header className="relative z-10 bg-transparent px-4 lg:pl-9 lg:pr-3">
             <div className="flex h-[58px] w-full items-center justify-between gap-4 text-[10px] font-semibold uppercase tracking-[0.13em] text-[#241f1b]">
