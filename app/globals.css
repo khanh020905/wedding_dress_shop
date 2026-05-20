@@ -1,7 +1,47 @@
 @import "tailwindcss";
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
+}
+
+/* Custom Elegant Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #faf6f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d8c9b2;
+  border-radius: 10px;
+  border: 2px solid #faf6f1; /* floating inset effect */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #b58c56;
+}
+
+.bridal-chat-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #d8b0a5 #fbf8f5;
+}
+
+.bridal-chat-scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+
+.bridal-chat-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.bridal-chat-scrollbar::-webkit-scrollbar-thumb {
+  background: #d8b0a5;
+  border-radius: 999px;
 }
 
 html,
@@ -20,9 +60,9 @@ body {
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-be-vietnam-pro), Arial, Helvetica, sans-serif;
-  --font-serif: var(--font-cormorant-garamond), "Times New Roman", serif;
-  --font-booking: var(--font-cormorant-garamond), "Times New Roman", serif;
+  --font-sans: var(--font-montserrat), sans-serif;
+  --font-serif: var(--font-playfair-display), serif;
+  --font-booking: var(--font-playfair-display), serif;
   --font-mono: "Courier New", Courier, monospace;
 }
 
@@ -33,7 +73,10 @@ body {
 
 html {
   scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: #d8c9b2 #faf6f1;
 }
+
 
 .hero {
   position: relative;

@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import { BookingForm } from "@/components/BookingForm";
+import BridalChatWidget from "@/components/chat/BridalChatWidget";
 import { TrackingLink } from "@/components/TrackingLink";
 
 const navigationItems = [
@@ -174,7 +176,8 @@ function SectionTitle({ children }: { children: React.ReactNode }) {
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#fbfaf7] text-[#1f1a17]">
+    <>
+      <main className="min-h-screen bg-[#fbfaf7] text-[#1f1a17]">
       <section id="home" className="hero">
         <div className="hero-image-wrapper">
           <Image
@@ -200,23 +203,39 @@ export default function Home() {
               </Link>
               <nav className="hidden flex-1 items-center justify-center gap-9 lg:flex">
                 {navigationItems.map((item) => (
-                  <a
+                  <TrackingLink
                     key={item.href}
                     href={item.href}
+                    label={item.label}
+                    location="desktop_nav"
                     className="flex h-[58px] items-center justify-center whitespace-nowrap border-b border-transparent pt-px transition hover:border-[#b58c56] hover:text-[#b58c56]"
                   >
                     {item.label}
-                  </a>
+                  </TrackingLink>
                 ))}
               </nav>
               <TrackingLink
                 href="#booking"
                 label="Đặt lịch thử váy"
                 location="header"
-                className="hidden h-9 min-w-[158px] items-center justify-center gap-2 rounded-full bg-white px-4 text-[10px] font-bold uppercase tracking-[0.1em] text-[#2f2924] shadow-sm ring-1 ring-[#eee3d3] transition hover:bg-[#b58c56] hover:text-white lg:inline-flex"
+                className="group hidden h-9 min-w-[158px] items-center justify-center gap-2 rounded-full bg-white px-4 text-[10px] font-bold uppercase tracking-[0.1em] text-[#2f2924] shadow-sm ring-1 ring-[#eee3d3] transition hover:bg-[#b58c56] hover:text-white lg:inline-flex"
               >
                 Đặt lịch thử váy
-                <span aria-hidden="true" className="text-[12px] leading-none">↗</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={2.5}
+                  stroke="currentColor"
+                  className="size-3 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"
+                  />
+                </svg>
               </TrackingLink>
               <details className="group lg:hidden">
                 <summary className="grid size-10 cursor-pointer list-none place-items-center rounded-full bg-white/86 text-lg font-bold text-[#2f2924] shadow-sm ring-1 ring-[#eee3d3] transition group-open:bg-[#b58c56] group-open:text-white">
@@ -227,13 +246,24 @@ export default function Home() {
                 <div className="absolute left-4 right-4 top-[64px] overflow-hidden rounded-[6px] bg-white shadow-xl ring-1 ring-[#eadfce]">
                   <nav className="grid divide-y divide-[#f0e7da] text-[12px] font-bold uppercase tracking-[0.12em] text-[#2f2924]">
                     {navigationItems.map((item) => (
-                      <a key={item.href} href={item.href} className="px-5 py-4 transition hover:bg-[#fbfaf7] hover:text-[#b58c56]">
+                      <TrackingLink
+                        key={item.href}
+                        href={item.href}
+                        label={item.label}
+                        location="mobile_nav"
+                        className="px-5 py-4 transition hover:bg-[#fbfaf7] hover:text-[#b58c56]"
+                      >
                         {item.label}
-                      </a>
+                      </TrackingLink>
                     ))}
-                    <a href="#booking" className="bg-[#b58c56] px-5 py-4 text-white transition hover:bg-[#9b7445]">
+                    <TrackingLink
+                      href="#booking"
+                      label="Đặt lịch thử váy"
+                      location="mobile_nav"
+                      className="bg-[#b58c56] px-5 py-4 text-white transition hover:bg-[#9b7445]"
+                    >
                       Đặt lịch thử váy
-                    </a>
+                    </TrackingLink>
                   </nav>
                 </div>
               </details>
@@ -266,7 +296,7 @@ export default function Home() {
               </div>
               <div className="mt-9 flex flex-col gap-4 sm:flex-row lg:mt-7">
                 <TrackingLink
-                  href="#pricing"
+                  href="#collection"
                   label="Xem bộ sưu tập"
                   location="hero"
                   className="inline-flex h-[52px] w-full items-center justify-center rounded-[3px] bg-[#b58c56] px-7 text-[12px] font-bold uppercase tracking-[0.12em] text-white shadow-sm transition hover:bg-[#9b7445] sm:h-14 sm:w-auto sm:px-9 sm:text-[13px]"
@@ -449,32 +479,42 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="booking" className="font-booking scroll-mt-16 relative overflow-hidden py-12 text-white">
+      <section id="booking" className="relative flex min-h-screen scroll-mt-16 overflow-hidden bg-[#efe4d5] py-14 text-[#241f1b]">
         <Image
           src="/images/anhbia.png"
           alt="Váy cưới trắng làm nền cho lời kêu gọi đặt lịch"
           fill
           sizes="100vw"
-          className="object-cover object-[70%_70%]"
+          className="object-cover object-[62%_52%] opacity-70"
         />
-        <div className="absolute inset-0 bg-[#6b4a28]/62" />
-        <div className="relative mx-auto flex max-w-6xl flex-col items-start justify-between gap-7 px-6 md:flex-row md:items-center">
-          <div>
-            <h2 className="max-w-2xl text-[44px] font-semibold leading-[1.02] tracking-[0.01em] md:text-[58px]">
-              Sẵn sàng tìm chiếc váy dành riêng cho bạn?
-            </h2>
-            <p className="mt-5 max-w-xl text-[18px] font-medium leading-7 tracking-[0.01em] text-white/92">
-              Đặt lịch thử váy miễn phí ngay hôm nay!
+        <div className="absolute inset-0 bg-gradient-to-b from-[#f1e3d2]/96 via-[#ead9c2]/88 to-[#c0a080]/55" />
+        <div className="relative mx-auto grid w-full max-w-[1380px] gap-10 px-5 sm:px-6 lg:grid-cols-[320px_minmax(0,1fr)] lg:items-center lg:gap-14 xl:grid-cols-[360px_minmax(0,1fr)] xl:gap-16">
+          <div className="mx-auto max-w-3xl pt-4 text-center lg:mx-0 lg:max-w-none lg:pt-0 lg:text-left">
+            <p className="mb-5 text-[12px] font-bold uppercase tracking-[0.22em] text-[#9b7445]">
+              Dream & Dress Appointment
             </p>
+            <h2 className="font-serif text-[40px] font-semibold leading-[1.04] tracking-normal text-[#231d19] md:text-[54px] lg:text-[48px] xl:text-[56px]">
+              Đặt lịch thử váy cưới riêng cho bạn
+            </h2>
+            <p className="mx-auto mt-6 max-w-2xl text-[16px] font-medium leading-7 tracking-normal text-[#5f5247] lg:mx-0">
+              Chọn trải nghiệm, ngày giờ và thông tin liên hệ. Dream & Dress sẽ nhận email tự động và gọi xác nhận lịch thử.
+            </p>
+            <div className="mx-auto mt-7 grid max-w-[430px] grid-cols-3 gap-3 text-center lg:mx-0 lg:grid-cols-1 lg:text-left xl:grid-cols-3 xl:text-center">
+              <div className="border-y border-[#b58c56]/35 py-3">
+                <p className="font-serif text-[26px] font-semibold text-[#9b7445]">30p</p>
+                <p className="mt-1 text-[11px] font-bold uppercase tracking-[0.12em] text-[#766657]">Tư vấn</p>
+              </div>
+              <div className="border-y border-[#b58c56]/35 py-3">
+                <p className="font-serif text-[26px] font-semibold text-[#9b7445]">Free</p>
+                <p className="mt-1 text-[11px] font-bold uppercase tracking-[0.12em] text-[#766657]">Thử váy</p>
+              </div>
+              <div className="border-y border-[#b58c56]/35 py-3">
+                <p className="font-serif text-[26px] font-semibold text-[#9b7445]">1:1</p>
+                <p className="mt-1 text-[11px] font-bold uppercase tracking-[0.12em] text-[#766657]">Stylist</p>
+              </div>
+            </div>
           </div>
-          <TrackingLink
-            href="tel:0900225067"
-            label="Đặt lịch ngay"
-            location="footer_cta"
-            className="inline-flex h-14 items-center justify-center rounded-[4px] bg-[#bf9155] px-9 text-[13px] font-bold uppercase tracking-[0.14em] text-white shadow-sm transition hover:bg-[#a77a42]"
-          >
-            Đặt lịch ngay →
-          </TrackingLink>
+          <BookingForm />
         </div>
       </section>
 
@@ -495,16 +535,18 @@ export default function Home() {
             </p>
             <div className="mt-5 flex items-center gap-3.5">
               {socialLinks.map((social) => (
-                <a
+                <TrackingLink
                   key={social.name}
                   href={social.href}
-                  aria-label={social.name}
+                  label={social.name}
+                  location="footer_social"
+                  ariaLabel={social.name}
                   target="_blank"
                   rel="noreferrer"
                   className="grid size-10 place-items-center rounded-full border border-[#d8c4a5] bg-white text-[12px] font-bold uppercase tracking-normal text-[#8f6a3c] transition hover:border-[#b58c56] hover:bg-[#b58c56] hover:text-white"
                 >
                   {social.label}
-                </a>
+                </TrackingLink>
               ))}
             </div>
           </div>
@@ -513,9 +555,14 @@ export default function Home() {
             <ul className="mt-4 space-y-2 text-[14px] text-[#6f665c]">
               {navigationItems.map((item) => (
                 <li key={item.href}>
-                  <a href={item.href} className="transition hover:text-[#b58c56]">
+                  <TrackingLink
+                    href={item.href}
+                    label={item.label}
+                    location="footer_nav"
+                    className="transition hover:text-[#b58c56]"
+                  >
                     {item.label}
-                  </a>
+                  </TrackingLink>
                 </li>
               ))}
             </ul>
@@ -542,5 +589,9 @@ export default function Home() {
         </div>
       </footer>
     </main>
+
+    <BridalChatWidget />
+
+    </>
   );
 }
