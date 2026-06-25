@@ -1,3 +1,5 @@
+import clientPromise from "@/lib/mongodb";
+
 type BookingPayload = {
   experience?: string;
   appointmentDate?: string;
@@ -147,6 +149,20 @@ export async function POST(request: Request) {
         { message: "Vui lòng điền đầy đủ thông tin bắt buộc." },
         { status: 400 },
       );
+    }
+
+    try {
+      const client = await clientPromise;
+      const db = client.db(process.env.MONGODB_DB || "dream_dress");
+      await db.collection("appointments").insertOne({
+        ...payload,
+        status: "moi",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      });
+    } catch (dbError) {
+      console.error("Lỗi lưu lịch hẹn vào DB:", dbError);
+      // Tiếp tục để gửi email/webhook
     }
 
     const sentByResend = await sendViaResend(payload);
